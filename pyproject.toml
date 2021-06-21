@@ -105,7 +105,7 @@ lightgbm       = "~=3.2"
 scikit-learn   = "~=0.23"
 # additional maximum requirements of gamma-pytools
 joblib         = "=1.*"
-typing_inspect = "~=0.6"
+typing_inspect = "~=0.7"
 
 [tool.black]
 # quiet = "True"
