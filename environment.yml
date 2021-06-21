@@ -12,15 +12,16 @@ dependencies:
   - numpy ~= 1.16
   - pandas ~= 1.2
   - python ~= 3.8
-  - scikit-learn ~= 0.24.2
+  - scikit-learn = 0.24.*
   - scipy ~= 1.6
   - sklearndf ~= 1.2
+  - typing_inspect ~= 0.7
   # build/test
   - black = 20.8b1
   - conda-build ~= 3.20
   - conda-verify ~= 3.1
   - docutils = 0.16.*
-  - flit = 3.0.*
+  - flit = 3.*
   - isort ~= 5.5
   - jinja2 ~= 2.11
   - m2r = 0.2.*
@@ -28,7 +29,7 @@ dependencies:
   - pre-commit ~= 2.7
   - pydata-sphinx-theme = 0.4.*
   - pytest ~= 5.2
-  - pytest-cov ~= 2.8
+  - pytest-cov ~= 2.9
   - pyyaml ~= 5.1
   - sphinx = 3.4.*
   - sphinx-autodoc-typehints = 1.11.*
@@ -45,4 +46,4 @@ dependencies:
   # pip
   - pip >= 20
   - pip:
-      - shap >=0.34,<0.40
+      - shap >=0.34,<0.40a
