@@ -102,7 +102,7 @@ sklearndf      = "~=1.1"
 # additional requirements of sklearndf
 boruta         = "~=0.3"
 lightgbm       = "~=3.2"
-scikit-learn   = "~=0.23"
+scikit-learn   = "~=0.24"
 # additional maximum requirements of gamma-pytools
 joblib         = "=1.*"
 typing_inspect = "~=0.7"
