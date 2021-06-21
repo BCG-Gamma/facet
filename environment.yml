@@ -12,7 +12,7 @@ dependencies:
   - numpy ~= 1.16
   - pandas ~= 1.2
   - python ~= 3.8
-  - scikit-learn ~= 0.23.1
+  - scikit-learn ~= 0.24.2
   - scipy ~= 1.5
   - sklearndf ~= 1.1
   # build/test
