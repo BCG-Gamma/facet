@@ -14,7 +14,7 @@ dependencies:
   - python ~= 3.8
   - scikit-learn ~= 0.24.2
   - scipy ~= 1.5
-  - sklearndf ~= 1.1
+  - sklearndf ~= 1.2
   # build/test
   - black = 20.8b1
   - conda-build ~= 3.20
