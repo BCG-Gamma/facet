@@ -28,7 +28,6 @@ from ._shap import (
     ShapCalculator,
     ShapInteractionValuesCalculator,
 )
-from ._shap_decomposition import ShapDecomposer, ShapInteractionDecomposer
 from ._shap_global_explanation import (
     ShapGlobalExplainer,
     ShapInteractionGlobalExplainer,
@@ -162,8 +161,6 @@ class LearnerInspector(
         *,
         explainer_factory: Optional[ExplainerFactory] = None,
         shap_interaction: bool = True,
-        legacy: bool = False,
-        min_direct_synergy: Optional[float] = None,
         n_jobs: Optional[int] = None,
         shared_memory: Optional[bool] = None,
         pre_dispatch: Optional[Union[str, int]] = None,
@@ -177,19 +174,6 @@ class LearnerInspector(
             SHAP interaction values are needed to determine feature synergy and
             redundancy.
             (default: ``True``)
-        :param legacy: `Deprecated: This parameter will be removed in FACET 1.2.`
-            If ``False``, use the recommended `SHAP vector projection` method;
-            if ``True``, use the deprecated `SHAP vector decomposition` method.
-            (default: ``False``)
-        :param min_direct_synergy: minimum direct synergy to consider a feature pair
-            for calculation of indirect synergy in conjunction with SHAP vector
-            decomposition; only relevant if parameters ``legacy`` and
-            ``shap_interaction`` are both ``True``.
-            This effectively acts as a noise threshold given the approximate nature of
-            SHAP calculations.
-            Consider increasing this value if you see warnings about contravariant
-            indirect synergy when fitting this inspector.
-            (default: <DEFAULT_MIN_DIRECT_SYNERGY>)
         """
         super().__init__(
             n_jobs=n_jobs,
@@ -216,34 +200,15 @@ class LearnerInspector(
                 )
                 shap_interaction = False
 
-        if not legacy:
-            if min_direct_synergy:
-                log.warning(
-                    "ignoring min_direct_synergy parameter "
-                    "(only relevant in legacy mode)"
-                )
-                min_direct_synergy = None
-
         self._explainer_factory = explainer_factory
         self._shap_interaction = shap_interaction
-        # todo: remove legacy property once we have ditched legacy global explanations
-        self._legacy = legacy
-        self._min_direct_synergy = min_direct_synergy
 
         self._crossfit: Optional[LearnerCrossfit[T_LearnerPipelineDF]] = None
         self._shap_calculator: Optional[ShapCalculator] = None
         self._shap_global_decomposer: Optional[ShapGlobalExplainer] = None
         self._shap_global_projector: Optional[ShapGlobalExplainer] = None
 
-    # dynamically complete the __init__ docstring
-    # noinspection PyTypeChecker
-    __init__.__doc__ = (
-        __init__.__doc__.replace(
-            "<DEFAULT_MIN_DIRECT_SYNERGY>",
-            str(ShapInteractionDecomposer.DEFAULT_MIN_DIRECT_SYNERGY),
-        )
-        + ParallelizableMixin.__init__.__doc__
-    )
+    __init__.__doc__ += ParallelizableMixin.__init__.__doc__
 
     def fit(self: T_Self, crossfit: LearnerCrossfit, **fit_params: Any) -> T_Self:
         """
@@ -289,12 +254,9 @@ class LearnerInspector(
                 f"but is a {type(learner).__name__}"
             )
 
-        shap_global_decomposer: Union[ShapDecomposer, ShapInteractionDecomposer, None]
         shap_global_projector: Union[
             ShapVectorProjector, ShapInteractionVectorProjector, None
         ]
-
-        legacy = self._legacy
 
         if self._shap_interaction:
             shap_calculator_type = (
@@ -310,12 +272,6 @@ class LearnerInspector(
                 pre_dispatch=self.pre_dispatch,
                 verbose=self.verbose,
             )
-            if legacy:
-                shap_global_decomposer = ShapInteractionDecomposer(
-                    min_direct_synergy=self._min_direct_synergy
-                )
-            else:
-                shap_global_decomposer = None
 
             shap_global_projector = ShapInteractionVectorProjector()
 
@@ -333,19 +289,13 @@ class LearnerInspector(
                 pre_dispatch=self.pre_dispatch,
                 verbose=self.verbose,
             )
-            if legacy:
-                shap_global_decomposer = ShapDecomposer()
-            else:
-                shap_global_decomposer = None
+
             shap_global_projector = ShapVectorProjector()
 
         shap_calculator.fit(crossfit=crossfit)
-        if legacy:
-            shap_global_decomposer.fit(shap_calculator=shap_calculator)
         shap_global_projector.fit(shap_calculator=shap_calculator)
 
         self._shap_calculator = shap_calculator
-        self._shap_global_decomposer = shap_global_decomposer
         self._shap_global_projector = shap_global_projector
 
         self._crossfit = crossfit
@@ -354,10 +304,7 @@ class LearnerInspector(
 
     @property
     def _shap_global_explainer(self) -> ShapGlobalExplainer:
-        if self._legacy:
-            return self._shap_global_decomposer
-        else:
-            return self._shap_global_projector
+        return self._shap_global_projector
 
     @property
     def is_fitted(self) -> bool:
