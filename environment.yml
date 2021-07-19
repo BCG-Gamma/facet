@@ -3,41 +3,46 @@ channels:
   - conda-forge
   - bcg_gamma
 dependencies:
+  # run
+  - boruta_py ~= 0.3
+  - gamma-pytools ~= 1.1
+  - joblib = 1.*
+  - lightgbm ~= 3.2
+  - matplotlib ~= 3.3
+  - numpy ~= 1.17
+  - pandas ~= 1.2
+  - python ~= 3.8
+  - scikit-learn ~= 0.23.1
+  - scipy = 1.5.*
+  - sklearndf ~= 1.1
+  # build/test
   - black = 20.8b1
-  - boruta_py >= 0.3
-  - conda-build = 3.20.*
-  - conda-verify = 3.1.*
+  - conda-build ~= 3.20
+  - conda-verify ~= 3.1
   - docutils = 0.16.*
   - flit = 3.0.*
-  - gamma-pytools >=1.0,<2
-  - isort = 5.5.*
-  - joblib >= 0.16
-  - jupyter >= 1.0
-  - lightgbm >= 3.0
+  - isort ~= 5.5
+  - jinja2 ~= 2.11
   - m2r = 0.2.*
-  - matplotlib >= 3.3
-  - nbsphinx ~= 0.8.5
-  - numpy >= 1.16
-  - pandas >= 1.0
-  - pip >= 20
-  - pluggy = 0.13.*
-  - pre-commit = 2.7.*
+  - pluggy ~= 0.13
+  - pre-commit ~= 2.7
   - pydata-sphinx-theme = 0.4.*
-  - pytest = 5.2.*
-  - pytest-cov = 2.8.*
-  - python = 3.8.*
-  - pyyaml >= 5.1
-  - scikit-learn >=0.23.1,<0.24
-  - scipy = 1.5.*  # todo: upgrade to 1.6 once we support scikit-learn 0.24
-  - seaborn = 0.11.*
-  - sklearndf >=1.0,<2
+  - pytest ~= 5.2
+  - pytest-cov ~= 2.8
+  - pyyaml ~= 5.1
   - sphinx = 3.4.*
   - sphinx-autodoc-typehints = 1.11.*
-  - tableone = 0.7.*
   - toml = 0.10.*
   - tox = 3.20.*
-  - typing_inspect >= 0.4
-  - xlrd >= 1.2
-  - yaml > 0.2
+  - yaml ~= 0.2
+  # notebooks
+  - jupyterlab = 3.*
+  - nbclassic ~= 0.2.8
+  - nbsphinx ~= 0.8.5
+  - openpyxl = 3.*
+  - seaborn = 0.11.*
+  - tableone = 0.7.*
+  # pip
+  - pip >= 20
   - pip:
       - shap >=0.34,<0.40

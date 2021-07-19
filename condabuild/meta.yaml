@@ -3,7 +3,7 @@ package:
   version: {{ environ.get('FACET_BUILD_FACET_VERSION') }}
 
 source:
-  git_url: {{FACET_PATH}}/facet
+  git_url: ../
 
 build:
   noarch: python
@@ -11,20 +11,27 @@ build:
 
 requirements:
   host:
-    - pip>=20.*
-    - python {{ environ.get('FACET_V_PYTHON', '=3.8.*') }}
-    - numpy {{ environ.get('FACET_V_NUMPY', '>=1.11.*') }}
     - flit>=3.0.*
+    - numpy {{ environ.get('FACET_V_NUMPY', '>=1.11.*') }}
+    - pip>=20.*
+    - python=3.8.*
   run:
-    - gamma-pytools{{ environ.get('FACET_V_GAMMA_PYTOOLS') }}
-    - matplotlib{{ environ.get('FACET_V_MATPLOTLIB') }}
-    - numpy{{ environ.get('FACET_V_NUMPY') }}
-    - packaging{{ environ.get('FACET_V_PACKAGING') }}
-    - pandas{{ environ.get('FACET_V_PANDAS') }}
-    - python{{ environ.get('FACET_V_PYTHON') }}
-    - scipy{{ environ.get('FACET_V_SCIPY') }}
-    - shap{{ environ.get('FACET_V_SHAP') }}
-    - sklearndf{{ environ.get('FACET_V_SKLEARNDF') }}
+    # boruta is called boruta_py on conda-forge
+    - boruta_py {{ environ.get('FACET_V_BORUTA') }}
+    - gamma-pytools {{ environ.get('FACET_V_GAMMA_PYTOOLS') }}
+    - ipython {{ environ.get('FACET_V_IPYTHON') }}
+    - joblib {{ environ.get('FACET_V_JOBLIB') }}
+    - lightgbm {{ environ.get('FACET_V_LIGHTGBM') }}
+    - matplotlib {{ environ.get('FACET_V_MATPLOTLIB') }}
+    - numpy {{ environ.get('FACET_V_NUMPY') }}
+    - packaging {{ environ.get('FACET_V_PACKAGING') }}
+    - pandas {{ environ.get('FACET_V_PANDAS') }}
+    - python {{ environ.get('FACET_V_PYTHON') }}
+    - scipy {{ environ.get('FACET_V_SCIPY') }}
+    - shap {{ environ.get('FACET_V_SHAP') }}
+    - scikit-learn {{ environ.get('FACET_V_SCIKIT_LEARN') }}
+    - sklearndf {{ environ.get('FACET_V_SKLEARNDF') }}
+    - typing_inspect {{ environ.get('FACET_V_TYPING_INSPECT') }}
 
 test:
   imports:

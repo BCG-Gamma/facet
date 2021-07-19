@@ -15,27 +15,19 @@ license = "Apache Software License v2.0"
 
 requires = [
     # direct requirements of gamma-facet
-    "gamma-pytools  ~=1.1.2",
-    "matplotlib     >=3.0,<3.4",
-    "numpy          >=1.16,<1.21",
-    "packaging      >=20",
-    "pandas         >=0.24,<1.3",
-    "scipy          >=1.2,<1.6",
-    "shap           >=0.34,<0.40",
-    "sklearndf      ~=1.1.0",
-    # additional requirements of sklearndf
-    "boruta         >=0.3",
-    "lightgbm       >=3.0",
-    "scikit-learn   >=0.21,<0.24",
-    # additional requirements of gamma-pytools
-    "joblib         >=0.14,<1.1",
-    "typing_inspect >=0.4,<0.7",
+    "gamma-pytools  ~=1.2,>=1.2.1",
+    "matplotlib     ~=3.0",
+    "numpy          >=1.17,<1.21a",
+    "packaging      ~=20.0",
+    "pandas         >=0.24,<2a",
+    "scipy          ~=1.2",
+    "shap           >=0.34,<0.40a",
+    "sklearndf      ~=1.2",
     # additional requirements of shap 0.38
-    # todo: remove once supported via shap 0.38 requirements
     "ipython        >=7",
 ]
 
-requires-python = ">=3.6,<3.9"
+requires-python = ">=3.6,<4a"
 
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -55,21 +47,22 @@ classifiers = [
 
 [tool.flit.metadata.requires-extra]
 testing = [
-    "pytest >= 5.2.*",
-    "pytest-cov == 2.8.*",
-    "flake8 == 3.8.*",
-    "flake8-comprehensions == 3.2.*",
-    "isort == 5.5.*",
+    "pytest ~= 5.2",
+    "pytest-cov ~= 2.8",
+    "flake8 ~= 3.8",
+    "flake8-comprehensions ~= 3.2",
+    "isort ~= 5.5",
 ]
 docs = [
-    "sphinx == 3.4.*",
-    "sphinx-autodoc-typehints == 1.11.*",
-    "pydata-sphinx-theme == 0.4.*",
+    "sphinx ~= 3.4.0",
+    "sphinx-autodoc-typehints ~= 1.11.0",
+    "pydata-sphinx-theme ~= 0.4.0",
+    "jinja2 ~= 2.11",
     "nbsphinx ~= 0.8.5",
-    "jupyter >= 1.0",
-    "docutils",
-    "xlrd == 1.2.*",
-    "m2r == 0.2.*",
+    "jupyter ~= 1.0",
+    "docutils ~= 0.16.0",
+    "xlrd ~= 1.2",
+    "m2r ~= 0.2.0"
 ]
 
 [tool.flit.metadata.urls]
@@ -78,40 +71,45 @@ Repository = "https://github.com/BCG-Gamma/facet"
 
 [build.matrix.min]
 # direct requirements of gamma-facet
-gamma-pytools  = "=1.1.0"
-matplotlib     = "=3.0.*"
-numpy          = "=1.16.*"
-packaging      = "=20.*"
-pandas         = "=0.24.*"
-python         = "=3.6.*"
-scipy          = "=1.2.*"
-shap           = "=0.34.*"
-sklearndf      = "=1.1.0"
-# additional requirements of sklearndf
-boruta         = "=0.3.*"
-lightgbm       = "=3.0.*"
-scikit-learn   = "=0.21.*"
-# additional requirements of gamma-pytools
-joblib         = "=0.14.*"
-typing_inspect = "=0.4.*"
+gamma-pytools  = "~=1.2.1"
+matplotlib     = "~=3.0.3"
+numpy          = ">=1.17.5,<18a"
+packaging      = "~=20.9"
+pandas         = "~=0.24.2"
+python         = "~=3.6.13"
+scipy          = "~=1.2.1"
+shap           = "~=0.34.0"
+sklearndf      = "~=1.2.0"
+# additional minimum requirements of sklearndf
+boruta         = "~=0.3.0"
+lightgbm       = "~=3.0.0"
+scikit-learn   = "~=0.21.3"
+# additional minimum requirements of gamma-pytools
+joblib         = "~=0.14.1"
+typing_inspect = "~=0.4.0"
+# additional minimum requirements of shap
+ipython        = "~=7.0"
 
 [build.matrix.max]
-gamma-pytools  = "=1.1.*"
-matplotlib     = "=3.3.*"
-numpy          = "=1.20.*"
-packaging      = ">=20"
-pandas         = "=1.2.*"
-python         = "=3.8.*"
-scipy          = "=1.5.*"
-shap           = "=0.39.*"
-sklearndf      = "=1.1.*"
-# additional requirements of sklearndf
-boruta         = ">=0.3"
-lightgbm       = ">=3.0"
-scikit-learn   = "=0.23.*"
-# additional requirements of gamma-pytools
-joblib         = "=1.0.*"
-typing_inspect = "=0.6.*"
+# direct requirements of gamma-facet
+gamma-pytools  = "~=1.2"
+matplotlib     = "~=3.4"
+numpy          = ">=1.20,<2a"
+packaging      = "~=20.9"
+pandas         = "~=1.2"
+python         = "~=3.8"
+scipy          = "~=1.5.3"
+shap           = "~=0.39.0"
+sklearndf      = "~=1.2"
+# additional maximum requirements of sklearndf
+boruta         = "~=0.3"
+lightgbm       = "~=3.2"
+scikit-learn   = "~=0.24.2"
+# additional maximum requirements of gamma-pytools
+joblib         = "~=1.0"
+typing_inspect = "~=0.6.0"
+# additional maximum requirements of shap
+ipython        = ">=7"
 
 [tool.black]
 # quiet = "True"
